@@ -1,0 +1,173 @@
+body {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+div.content {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    margin: auto;
+    background: rgba(168, 154, 154, 0.18);
+    min-height: 950px;
+}
+
+div.body {
+    flex: 1 1 auto;
+}
+
+div.header__image img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+div.header__image {
+    background: rgba(56, 49, 102, 0.83);
+    width: 100%;
+    height: 150px;
+}
+
+div.footer {
+    background: rgba(0, 0, 0, 0.52);
+    width: 100%;
+}
+
+div.header__menu {
+    padding-top: 0;
+    background: rgba(0, 0, 0, 0.52);
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+div.header__menu__content a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 30px;
+}
+
+div.header__menu__content a:hover {
+    color: gray;
+}
+
+div.body__title h2 {
+    width: 100%;
+    text-align: center;
+}
+
+div.body__content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+div.body__content__products {
+    background: rgba(248, 241, 241, 0.5);
+    width: 33%;
+    border: rgba(0, 0, 0, 0.41) 2px solid;
+    border-radius: 10px;
+}
+
+div.body__content__products:hover {
+    background: rgba(175, 174, 174, 0.7);
+}
+
+div.content__image {
+}
+
+div.content__image img {
+    display: block;
+    margin: auto;
+    height: 150px;
+    width: 100px;
+}
+
+div.content__text {
+    padding-left: 10px;
+}
+
+div.content__text a {
+    text-decoration: none;
+    color: #84847e;
+}
+
+p.content__text__price {
+    font-size: 12px;
+}
+
+p.profile__text {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+p.profile__success {
+    color: #8aa857;
+    font-size: 20px;
+}
+
+p.profile__error {
+    color: red;
+    font-size: 20px;
+}
+
+div.profile__buttons a{
+    padding: 10px;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+div.profile__buttons {
+    width: 100%;
+    background: rgba(135, 135, 135, 0.58);
+}
+
+div.payment__content {
+    width: 30%;
+    margin: auto;
+    padding-top: 40px;
+}
+
+div.stock__form__content {
+    width: 15%;
+    padding-top: 40px;
+    margin: auto;
+}
+
+div.show__content {
+    width: 100%;
+}
+
+div.show__item {
+    display: inline-block;
+    margin: 10px;
+    width: 40%;
+}
+
+div.show__item p {
+    font-weight: 400;
+    font-size: 20px;
+}
+
+div.item__image img{
+    max-width: 290px;
+    max-height: 450px;
+    padding: 10px;
+}
+
+div.item__image {
+    float: left;
+    height: 500px;
+}
+
+div.registration__block {
+    width: 100%;
+}
+
+div.registration__form {
+    padding-top: 40px;
+    width: 25%;
+    margin: auto;
+    font-size: 20px;
+    font-weight: 400;
+}

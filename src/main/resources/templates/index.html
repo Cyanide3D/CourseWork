@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Index page</title>
+    <link href="css/index.css" rel="stylesheet">
+</head>
+<body style="background-image: url(/img/back.jpg)">
+<div class="content">
+    <div class="header">
+        <div class="header__image">
+<!--            <img src="img/header.png">-->
+        </div>
+        <div class="header__menu">
+            <div class="header__menu__content">
+                <a href="/">Main</a>
+            </div>
+            <div class="header__menu__content">
+                <a href="/payment">Payment</a>
+            </div>
+            <div class="header__menu__content">
+                <a href="/profile">Profile</a>
+            </div>
+            <div class="header__menu__content">
+                <a href="/auth">Registration</a>
+            </div>
+        </div>
+    </div>
+    <div class="body">
+        <div class="body__title">
+            <h2>Products for sale: </h2>
+        </div>
+        <div class="body__content">
+            <div class="body__content__products" th:each="prod : ${products}">
+                <div class="content__image">
+                    <img th:src="${prod.images[0]}">
+                </div>
+                <hr>
+                <div class="content__text">
+                    <a th:href="@{/stock/{id}(id=${prod.id})}"><h2 th:text="${prod.productName}"></h2></a>
+                    <p th:text="${prod.description}"></p>
+                    <hr>
+                    <p class="content__text__price" th:text="${'Price: ' + prod.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>(c)It's footer.</p>
+    </div>
+</div>
+</body>
+</html>

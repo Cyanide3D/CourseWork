@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Index page</title>
+    <link href="css/index.css" rel="stylesheet">
+</head>
+<body style="background-image: url(/img/back.jpg)">
+<div class="content">
+    <div class="header">
+        <div class="header__image">
+<!--            <img src="img/header.png">-->
+        </div>
+        <div class="header__menu">
+            <div class="header__menu__content">
+                <a href="/">Main</a>
+            </div>
+            <div class="header__menu__content">
+                <a href="/payment">Payment</a>
+            </div>
+            <div class="header__menu__content">
+                <a href="/profile">Profile</a>
+            </div>
+        </div>
+    </div>
+    <div class="body">
+        <div class="payment__content">
+            <form th:action="@{/payment}" method="post" th:object="${payment}">
+
+                <label for="payment">Price:</label><br>
+                <input type="text" th:field="*{price}" id="payment" name="payment"><br><br>
+
+                <input type="submit" value="Pay">
+
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+        <p>(c)It's footer.</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Index page</title>
+    <link href="/css/index.css" rel="stylesheet">
+</head>
+<body style="background-image: url(/img/back.jpg)">
+<div class="content">
+    <div class="header">
+        <div class="header__image">
+<!--            <img src="/img/header.png">-->
+        </div>
+        <div class="header__menu">
+            <div class="header__menu__content">
+                <a href="/">Main</a>
+            </div>
+            <div class="header__menu__content">
+                <a href="/payment">Payment</a>
+            </div>
+            <div class="header__menu__content">
+                <a href="/profile">Profile</a>
+            </div>
+        </div>
+    </div>
+    <div class="body">
+        <form id="data" th:method="post" th:action="@{/stock/activate/{id}(id=${product.id})}" th:object="${product}">
+        </form>
+        <form id="delete" th:method="post" th:action="@{/stock/delete/{id}(id=${product.id})}" th:object="${product}">
+        </form>
+        <form id="addcart" th:method="post" th:action="@{/cart/{id}(id=${product.id})}" th:object="${product}">
+        </form>
+
+        <div>
+
+        </div>
+        <div class="show__content">
+            <div class="show__item item__image">
+                <img th:src="${product.images[0]}">
+            </div>
+            <div th:if="${user}" class="show__item">
+                <button th:if="${#strings.equals(user.role,'ADMIN')}" type="submit" form="data">ACTIVATE</button>
+                <button th:if="${#strings.equals(user.role,'ADMIN')}" type="submit" form="delete">DELETE</button>
+                <button th:if="${#strings.equals(user.role,'USER')}" type="submit" form="addcart">Add to cart</button>
+            </div>
+            <div class="show__item">
+                <p th:text="${'Product name: ' + product.productName}"></p>
+                <p th:text="${'Product description: ' + product.description}"></p>
+                <p th:text="${'Product price: ' + product.price}"></p>
+                <p th:text="${'Pawnshop address: ' + product.addressPawnshop}"></p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>(c)It's footer.</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Index page</title>
+    <link href="css/index.css" rel="stylesheet">
+</head>
+<body style="background-image: url(/img/back.jpg)">
+<div class="content">
+    <div class="header">
+        <div class="header__image">
+<!--            <img src="img/header.png">-->
+        </div>
+        <div class="header__menu">
+            <div class="header__menu__content">
+                <a href="/">Main</a>
+            </div>
+            <div class="header__menu__content">
+                <a href="/payment">Payment</a>
+            </div>
+            <div class="header__menu__content">
+                <a href="/profile">Profile</a>
+            </div>
+        </div>
+    </div>
+    <div class="body">
+        <div class="stock__form__content">
+            <form th:action="@{/stock}" method="post">
+                <div>
+                    <label for="productName">Product name:</label><br>
+                    <input type="text" th:value="${product.productName}" id="productName" name="productName"><br><br>
+
+                    <label for="description">Description:</label><br>
+                    <input type="text" th:value="${product.description}" id="description" name="description"><br><br>
+
+                    <label for="price">Price:</label><br>
+                    <input type="text" th:value="${product.price}" id="price" name="price"><br><br>
+
+                    <label for="rawImages">Images (comma separated):</label><br>
+                    <input type="text" th:value="${product.rawImages}" id="rawImages" name="rawImages"><br><br>
+
+                    <label for="addressPawnshop">Address pawnshop:</label><br>
+                    <input type="text" th:value="${product.addressPawnshop}" id="addressPawnshop" name="addressPawnshop">
+                </div>
+                <hr>
+                <div>
+                    <label for="name">Owner name:</label><br>
+                    <input type="text" th:value="${borrower.name}" id="name" name="name"><br><br>
+
+                    <label for="passportId">Owner passport ID:</label><br>
+                    <input type="text" th:value="${borrower.passportId}" id="passportId" name="passportId"><br><br>
+
+                    <label for="phoneNumber">Owner phone number:</label><br>
+                    <input type="text" th:value="${borrower.phoneNumber}" id="phoneNumber" name="phoneNumber">
+                </div>
+                <br>
+                <input type="submit" value="Execute">
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+        <p>(c)It's footer.</p>
+    </div>
+</div>
+</body>
+</html>
