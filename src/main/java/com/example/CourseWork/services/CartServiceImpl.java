@@ -21,43 +21,43 @@ public class CartServiceImpl implements CartService {
     private ProductService productService;
 
     @Override
-    public void addToCart(Long productId, Long userId) {
-        Cart cartEntity = findCartByUserId(userId);
-        Product productEntity = productService.findProductById(productId);
+    public void addToCart(Long productId, Long userId) { // Добавляем товар в корзину
+        Cart cartEntity = findCartByUserId(userId); // Ищем корзину по ID пользователя
+        Product productEntity = productService.findProductById(productId); // Ищем товар по ИД
 
-        if (isPresentProductInCart(cartEntity, productEntity)) {
+        if (isPresentProductInCart(cartEntity, productEntity)) { // Если этот товар уже есть в корзине то выкидываем ошибку
             throw new DuplicateProductInCartException();
         }
 
-        cartEntity.addProduct(productEntity);
-        cartRepository.save(cartEntity);
+        cartEntity.addProduct(productEntity); // Добавляем товар в коризну
+        cartRepository.save(cartEntity); // Сохраняем корзину
     }
 
     @Override
-    public void deleteFromCart(Long productId, Long userId) {
-        Cart cartEntity = findCartByUserId(userId);
-        cartEntity.getProducts().removeIf(product -> product.getId().equals(productId));
+    public void deleteFromCart(Long productId, Long userId) { // Удаляем товар из корзины
+        Cart cartEntity = findCartByUserId(userId); // Ищем корзину по ID
+        cartEntity.getProducts().removeIf(product -> product.getId().equals(productId)); // Вытаскиваем продукты из корзины, если в корзине есть ID, который пришлё в метод, то удаляем товар из корзины
 
-        cartRepository.save(cartEntity);
+        cartRepository.save(cartEntity); // Сохраняем корзину
     }
 
     @Override
-    public List<Product> getProductsByUserId(Long userId) {
+    public List<Product> getProductsByUserId(Long userId) { // Получаем все товары из корзины конкретного пользователя
         return findCartByUserId(userId).getProducts();
     }
 
     @Override
-    public void deleteCart(Long id) {
+    public void deleteCart(Long id) { // Удаляем корзину из бд, если присутствует
         cartRepository.findById(id).ifPresent(cartRepository::delete);
     }
 
     @Override
-    public Cart findCartByUserId(Long userId) {
+    public Cart findCartByUserId(Long userId) { // Ищем корзину по ID пользователя
         User userEntity = userDetailsService.findUserById(userId);
-        return cartRepository.findByUser(userEntity).orElseGet(() -> cartRepository.save(new Cart(userEntity)));
+        return cartRepository.findByUser(userEntity).orElseGet(() -> cartRepository.save(new Cart(userEntity))); // Если в бд есть корзина, возвращаем её, иначе создаём новую, сохраняем, и возвращаем её
     }
 
-    private boolean isPresentProductInCart(Cart cart, Product product) {
-        return cart.getProducts().stream().anyMatch(prod -> prod.getId().equals(product.getId()));
+    private boolean isPresentProductInCart(Cart cart, Product product) { // Смотрим, есть ли товар в корзине
+        return cart.getProducts().stream().anyMatch(prod -> prod.getId().equals(product.getId())); // Если ID товара в корзине равен ID товара, передоваемого в параметры то возвращаем true, иначе false
     }
 }

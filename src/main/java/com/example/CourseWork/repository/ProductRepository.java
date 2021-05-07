@@ -10,5 +10,5 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     Product findOneById(Long id);
     List<Product> findAllByHoldAndSold(boolean hold, boolean sold);
-    List<Product> findAllByDateOfTakeAfterAndHold(LocalDate date, boolean hold);
+    List<Product> findAllByExpireDateBeforeAndHold(LocalDate date, boolean hold);
 }

@@ -18,6 +18,8 @@ public class Product {
     private String productName;
     @Column(name = "date_of_take")
     private LocalDate dateOfTake;
+    @Column(name = "expire_date")
+    private LocalDate expireDate;
     @Basic
     private String description;
     @Transient
@@ -38,6 +40,7 @@ public class Product {
 
     public Product() {
         this.dateOfTake = LocalDate.now();
+        this.expireDate = LocalDate.now().plusDays(15);
         this.hold = true;
     }
 }

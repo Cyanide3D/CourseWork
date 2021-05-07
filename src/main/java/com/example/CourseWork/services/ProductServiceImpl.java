@@ -25,16 +25,16 @@ public class ProductServiceImpl implements ProductService {
     private BorrowerRepository borrowerRepository;
 
     @Override
-    public Product saveProduct(Product product, Borrower borrower) {
-        prepareProductImages(product);
+    public Product saveProduct(Product product, Borrower borrower) { // Сохраняем товар
+        prepareProductImages(product); // Превращаем строку с картинками в удобный массив
 
-        Product productEntity = productRepository.save(product);
-        Borrower borrowerEntity = borrowerRepository.findByPassportId(borrower.getPassportId()).orElseGet(() -> borrowerRepository.save(borrower));
+        Product productEntity = productRepository.save(product); // Сохраняем товар
+        Borrower borrowerEntity = borrowerRepository.findByPassportId(borrower.getPassportId()).orElseGet(() -> borrowerRepository.save(borrower)); // Сохраняем закладчика, или получаем имеющегося
 
-        borrowerEntity.addPledge(productEntity);
-        productEntity.setBorrower(borrowerEntity);
+        borrowerEntity.addPledge(productEntity); // Добавляем товар закладчику
+        productEntity.setBorrower(borrowerEntity); // Устанавливаем товару закладчика
 
-        borrowerRepository.save(borrowerEntity);
+        borrowerRepository.save(borrowerEntity); // Сохраняем обе сущности
         return productRepository.save(productEntity);
     }
 
@@ -50,9 +50,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Scheduled(cron = "0 0 0 * * ?")
-    public void activateOutdatedProducts() {
-        LocalDate date = LocalDate.now().plusDays(15);
-        List<Product> products = productRepository.findAllByDateOfTakeAfterAndHold(date, true);
+    public void activateOutdatedProducts() { // Автоматичекое выставление товаров на продажу, метод будет выполняться раз в день
+        List<Product> products = productRepository.findAllByExpireDateBeforeAndHold(LocalDate.now(), true);
 
         log.info("Start product activation process...");
         for (Product product : products) {
@@ -62,7 +61,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void activate(Long productId) {
+    public void activate(Long productId) { // Устанавливаем статус HOLD на false
         Product entityProduct = findProductById(productId);
         entityProduct.setHold(false);
         productRepository.save(entityProduct);
@@ -70,7 +69,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findAllTradableProducts() {
+    public List<Product> findAllTradableProducts() { // Получаем все товары, которые можно купить
         return productRepository.findAllByHoldAndSold(false, false);
     }
 
@@ -80,7 +79,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProduct(Long id) {
+    public void deleteProduct(Long id) { // Удаляем продукт по ИД, если таковой имеется
         Optional.ofNullable(findProductById(id)).ifPresent(productRepository::delete);
     }
 }

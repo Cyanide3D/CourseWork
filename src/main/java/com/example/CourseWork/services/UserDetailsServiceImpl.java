@@ -22,14 +22,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void increaseMoney(Payment payment, Long userId) {
+    public void increaseMoney(Payment payment, Long userId) { // Увеличиваем кол-во денег пользователя
         User userEntity = findUserById(userId);
         userEntity.setMoney(userEntity.getMoney() + payment.getPrice());
 
         userRepository.save(userEntity);
     }
 
-    public void save(User user) {
+    public void save(User user) { // Сохраняем пользователя
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
