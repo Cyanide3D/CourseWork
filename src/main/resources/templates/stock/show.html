@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Index page</title>
@@ -48,6 +48,10 @@
                 <p th:text="${'Product description: ' + product.description}"></p>
                 <p th:text="${'Product price: ' + product.price}"></p>
                 <p th:text="${'Pawnshop address: ' + product.addressPawnshop}"></p>
+                <div th:if="${user}">
+                    <p th:if="${#strings.equals(user.role,'ADMIN')}" th:text="${'Sold: ' + product.sold}"></p>
+                    <p th:if="${#strings.equals(user.role,'ADMIN')}" th:text="${'Hold: ' + product.hold}"></p>
+                </div>
             </div>
         </div>
     </div>
